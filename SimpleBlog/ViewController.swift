@@ -11,20 +11,11 @@ import UIKit
 class ViewController: UIViewController {
     var blogs : [Blog] = []
     
-    @IBAction func deleteAllButtonClicked(_ sender: Any) {
-        for blog in blogs {
-            print("Deleting ID: \(blog.blogID)")
-            BlogAPI.deleteAllBlogs(with: blog.blogID)
-            sleep(1)
-        }
-        blogs = []
-        tableView.reloadData()
-    }
-    
     @IBAction func addButtonClick(_ sender: Any) {
-        goToDetailVC(blog: Blog())
+        let detailController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        navigationController?.pushViewController(detailController, animated: true)
     }
-    
+
     @IBOutlet weak var tableView: UITableView!{
     didSet{
         tableView.delegate = self
@@ -35,32 +26,41 @@ class ViewController: UIViewController {
     }
 }
     override func viewWillAppear(_ animated: Bool) {
-        self.tableView.reloadData()
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        BlogAPI.getAllBlogs{(blogs,error) in
+        BlogAPI.getABlog{(blogs,error) in
             if let validError = error{
                 print(validError.localizedDescription)
                 return
             }
-                self.blogs = blogs
-                self.tableView.reloadData()
-            }
+            self.blogs = blogs
+            self.tableView.reloadData()
+        }
     }
-    
-    
-    func goToDetailVC(blog: Blog){
-        let storyboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
-        let vc = storyboard.instantiateViewController(withIdentifier: "DeatilViewController") as? DeatilViewController
-        vc?.currentBlog = blog
-        navigationController?.pushViewController(vc!, animated: true)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.tableView.reloadData()
     }
-
 }//end
 
 extension ViewController: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        detailController.currentBlog = blogs[indexPath.row]
+        navigationController?.pushViewController(detailController, animated: true)
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
     
+            let deletedBlogID = blogs[indexPath.row].blogID
+            BlogAPI.deleteABlog(with: Int(deletedBlogID!)!, completion: { (error) in
+                if error == nil{
+                    DispatchQueue.main.async {
+                        self.blogs.remove(at: indexPath.row)
+                        self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                    }
+                }
+            })
+        }
+    }
 }
 
 
@@ -74,37 +74,9 @@ extension ViewController: UITableViewDataSource{
         return configured(blogCell: cell, withBlog: blogs[indexPath.row])
         }
     
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.delete) {
-            print("Deleting Blog")
-            BlogAPI.deleteAllBlogs(with: blogs[indexPath.row].blogID)
-            blogs.remove(at: indexPath.row)
-            tableView.reloadData()
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        
-        goToDetailVC(blog: blogs[indexPath.row])
-    
-    }
-    
-    
     func configured(blogCell: BlogCell, withBlog blog: Blog) -> BlogCell{
         blogCell.blogTitleLabel.text = blog.title
         blogCell.blogDetailLabel.text = blog.body
-        
         return blogCell
-        
     }
 }
-
-
-
-
-
-

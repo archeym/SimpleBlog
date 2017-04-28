@@ -12,7 +12,7 @@
 		21183A6E1EB195670097B853 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21183A6C1EB195670097B853 /* Main.storyboard */; };
 		21183A701EB195670097B853 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21183A6F1EB195670097B853 /* Assets.xcassets */; };
 		21183A731EB195670097B853 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21183A711EB195670097B853 /* LaunchScreen.storyboard */; };
-		21183A7B1EB198710097B853 /* DeatilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21183A7A1EB198710097B853 /* DeatilViewController.swift */; };
+		21183A7B1EB198710097B853 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21183A7A1EB198710097B853 /* DetailViewController.swift */; };
 		21183A821EB199A70097B853 /* BlogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21183A801EB199A70097B853 /* BlogCell.swift */; };
 		21183A831EB199A70097B853 /* BlogCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21183A811EB199A70097B853 /* BlogCell.xib */; };
 		21183A851EB19C220097B853 /* Blog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21183A841EB19C220097B853 /* Blog.swift */; };
@@ -27,7 +27,7 @@
 		21183A6F1EB195670097B853 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		21183A721EB195670097B853 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		21183A741EB195670097B853 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		21183A7A1EB198710097B853 /* DeatilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeatilViewController.swift; sourceTree = "<group>"; };
+		21183A7A1EB198710097B853 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		21183A801EB199A70097B853 /* BlogCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogCell.swift; sourceTree = "<group>"; };
 		21183A811EB199A70097B853 /* BlogCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlogCell.xib; sourceTree = "<group>"; };
 		21183A841EB19C220097B853 /* Blog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Blog.swift; sourceTree = "<group>"; };
@@ -87,7 +87,7 @@
 		21183A7D1EB199320097B853 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				21183A7A1EB198710097B853 /* DeatilViewController.swift */,
+				21183A7A1EB198710097B853 /* DetailViewController.swift */,
 				21183A6A1EB195670097B853 /* ViewController.swift */,
 			);
 			name = Controllers;
@@ -188,7 +188,7 @@
 				21183A6B1EB195670097B853 /* ViewController.swift in Sources */,
 				21183A821EB199A70097B853 /* BlogCell.swift in Sources */,
 				21183A851EB19C220097B853 /* Blog.swift in Sources */,
-				21183A7B1EB198710097B853 /* DeatilViewController.swift in Sources */,
+				21183A7B1EB198710097B853 /* DetailViewController.swift in Sources */,
 				21183A871EB1A0990097B853 /* BlogAPI.swift in Sources */,
 				21183A691EB195670097B853 /* AppDelegate.swift in Sources */,
 			);
@@ -356,6 +356,7 @@
 				21183A791EB195670097B853 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

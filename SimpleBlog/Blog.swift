@@ -9,22 +9,13 @@
 import Foundation
 
 class Blog {
-    
-    let blogID : Int
+    let blogID : String!
     var title : String = "Untitled"
     var body : String?
-    
-    init() {
-        blogID = 1001
-        title = ""
-        body = ""
-    }
-    
-    init?(dictionary : [String:Any]){
-        guard let validID = dictionary["id"] as? Int else { return nil }
-        
-        blogID = validID
-        title = dictionary["title"] as? String ?? "Untitled"
+    init?(dictionary : [String:Any]) {
+        guard let validId = dictionary["id"] as? Int else {return nil}
+        blogID = String(validId)
+        title = dictionary["title"] as? String ?? ""
         body = dictionary["body"] as? String
     }
     
